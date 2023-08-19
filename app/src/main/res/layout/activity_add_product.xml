@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView
+    android:id="@+id/addTyer"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardElevation="8dp"
+    app:cardUseCompatPadding="true">
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Custom layout for Spinner labels -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical">
+
+            <TextView
+
+                android:id="@+id/labelCategory"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tire Type"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+            <Spinner
+                android:id="@+id/spinnerCategory"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:padding="18dp"
+                android:prompt="@string/spinner_prompt_tire_type"
+                android:entries="@array/category"
+                android:background="@drawable/spinner_background"
+                />
+
+        </LinearLayout>
+
+        <!-- EditText with TextInputLayout for Product Name -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayoutProductName"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+
+            android:hint="Product Name">
+
+            <EditText
+                android:id="@+id/editProductName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/edit_text_border"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- EditText with TextInputLayout for Product Brand -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayoutProductBrand"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Product Brand">
+
+            <EditText
+
+                android:background="@drawable/edit_text_border"
+                android:id="@+id/editProductBrand"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- EditText with TextInputLayout for Cost Price -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayoutCostPrice"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Cost Price">
+
+            <EditText
+                android:background="@drawable/edit_text_border"
+                android:id="@+id/editCostPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- EditText with TextInputLayout for Selling Price -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayoutSellingPrice"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Selling Price">
+
+            <EditText
+                android:background="@drawable/edit_text_border"
+                android:id="@+id/editSellingPrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- EditText with TextInputLayout for Wholesale Price -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayoutWholesalePrice"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Wholesale Price">
+
+            <EditText
+                android:background="@drawable/edit_text_border"
+                android:id="@+id/editWholesalePrice"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- EditText with TextInputLayout for Quantity -->
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayoutQuantity"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:hint="Quantity">
+
+            <EditText
+                android:background="@drawable/edit_text_border"
+                android:id="@+id/editQuantity"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+        <!-- Tyer details -->
+
+        <include
+            layout="@layout/activity_add_tyer"
+            android:id="@+id/tyerDetailsLayout"
+            android:visibility="gone" />
+
+        <!-- Prod details -->
+
+        <include
+            layout="@layout/activity_add_prod"
+            android:id="@+id/OtherProdDetailsLayout"
+            android:visibility="gone" />
+
+
+
+        <Button
+            android:id="@+id/buttonAddProduct"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="16dp"
+            android:text="Add Product" />
+    </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.cardview.widget.CardView>

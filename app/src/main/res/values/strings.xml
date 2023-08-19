@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">JagdambaEnterprises</string>
+    <string-array name="tire_types">
+        <item>FRONT</item>
+        <item>REAR</item>
+    </string-array>
+    <string-array name="sizes">
+    </string-array>
+    <string-array name="category">
+        <item>Tyer</item>
+        <item>Other</item>
+
+    </string-array>
+    <string-array name="sizeUnit">
+        <item>KG</item>
+        <item>Gram</item>
+        <item>Litre</item>
+        <item>Piece</item>
+        <item>Pair</item>
+        <item>Set</item>
+        <item>Box</item>
+        <item>Packet</item>
+        <item>Inch</item>
+        <item>MM</item>
+        <item>CM</item>
+       <item>Others</item>
+    </string-array>
+    <string-array name="VehicalType">
+        <item>TwoWheeler</item>
+        <item>FourWheeler</item>
+        <item>ThreeWheeler</item>
+        <item>Tractor</item>
+        <item>Others</item>
+    </string-array>
+    <string name="api_url">http://192.168.0.204:8080/</string>
+    <string name="spinner_prompt_tire_type">Select Tire Type</string>
+    <string name="spinner_prompt_size">Select Size</string>
+    <string name="spinner_prompt_category">Select Category</string>
+
+
+</resources>

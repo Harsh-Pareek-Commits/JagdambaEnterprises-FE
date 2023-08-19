@@ -1,0 +1,93 @@
+<!-- item_stock.xml -->
+<androidx.cardview.widget.CardView
+    android:id="@+id/cardView"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="8dp"
+    app:cardElevation="8dp"
+    app:cardCornerRadius="16dp"
+    app:cardUseCompatPadding="true">
+
+    <!-- Content layout -->
+<LinearLayout
+android:layout_width="match_parent"
+android:layout_height="wrap_content"
+android:orientation="horizontal"
+    android:padding="16dp">
+
+    <!-- ImageView for the image on the left -->
+<ImageView
+android:id="@+id/imageView"
+android:layout_width="100dp"
+android:layout_height="100dp"
+android:src="@drawable/tyer"
+    android:layout_gravity="center_vertical"
+    android:scaleType="centerCrop"
+    android:contentDescription="Product Image"/>
+
+    <!-- Vertical LinearLayout for text information -->
+<LinearLayout
+android:layout_width="0dp"
+android:layout_height="wrap_content"
+android:layout_weight="1"
+android:orientation="vertical"
+android:gravity="start|center_vertical"
+android:paddingStart="16dp">
+
+<!-- Product Name -->
+<TextView
+    android:id="@+id/textName"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="18sp"
+    android:textStyle="bold"/>
+
+<!-- Product Brand -->
+<TextView
+    android:id="@+id/textBrand"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="14sp"/>
+
+<!-- Size Info -->
+<TextView
+    android:id="@+id/textSize"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="14sp"/>
+
+<!-- Cost Price -->
+<TextView
+    android:id="@+id/textCostPrice"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="14sp"/>
+
+<!-- Selling Price -->
+<TextView
+    android:id="@+id/textSellingPrice"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="14sp"/>
+
+<!-- Wholesale Price -->
+<TextView
+    android:id="@+id/textWholesalePrice"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="14sp"/>
+
+<!-- Stock -->
+<TextView
+    android:id="@+id/textStock"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:textSize="14sp"/>
+
+<!-- Other fields can be added similarly -->
+
+</LinearLayout>
+    </LinearLayout>
+    </androidx.cardview.widget.CardView>

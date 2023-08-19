@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.example.jagdambaenterprises">
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <application
+        android:usesCleartextTraffic="true"
+
+        android:allowBackup="true"
+        android:icon="@drawable/tyer"
+        android:theme="@style/AppTheme"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        >
+
+        <!-- Your launcher activity -->
+        <activity
+            android:name=".LoginActivity"
+            android:label="Jagdamba"
+            tools:ignore="ExtraText"
+            android:theme="@style/AppTheme"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <!-- Other activities -->
+        <activity
+            android:name=".HomeActivity"
+            android:label="Home"
+            android:theme="@style/Theme.AppCompat"
+            android:exported="true" />
+
+        <activity
+            android:name=".AddStockActivity"
+            android:label="Add Stock"
+            android:theme="@style/AppTheme"
+            android:exported="true" />
+
+        <activity android:name=".ViewStockActivity"
+            android:label="View Stock"
+            android:theme="@style/AppTheme"
+            android:exported="true"/>
+        <activity
+            android:name=".AddProductActivity"
+            android:label="Add Product"
+            />
+
+
+        <!-- ... Other components go here ... -->
+
+    </application>
+
+
+</manifest>
+

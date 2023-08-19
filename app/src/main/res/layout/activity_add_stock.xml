@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+<RelativeLayout android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:padding="16dp"
+    android:background="#FFFFFF"
+    tools:context=".AddStockActivity"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Label for Product Name -->
+    <TextView
+        android:id="@+id/labelProductName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Product Name"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:layout_marginTop="16dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputLayoutProductName"
+        style="@style/TextInputLayoutStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/labelProductName"
+        android:hint="">
+
+        <EditText
+            android:id="@+id/editProductName"
+            style="@style/TextInputEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="text" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Label for Product Size -->
+    <TextView
+        android:id="@+id/labelProductSize"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Product Size"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:layout_below="@id/inputLayoutProductName"
+        android:layout_marginTop="16dp"/>
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputLayoutProductSize"
+        style="@style/TextInputLayoutStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/labelProductSize"
+        android:hint="">
+
+        <Spinner
+            android:id="@+id/spinnerProductSize"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/inputLayoutProductSize"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/spinner_background"
+            android:spinnerMode="dropdown"
+            android:padding="15dp"
+            android:dropDownHeight="wrap_content"
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+        <TextView
+            android:id="@+id/labelDiameter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Diameter"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:layout_below="@id/inputLayoutProductSize"
+            android:layout_marginTop="16dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayoutDiameter"
+            style="@style/TextInputLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/labelDiameter"
+            android:hint="">
+
+            <Spinner
+                android:id="@+id/spinnerDiameter"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/inputLayoutProductSize"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/spinner_background"
+                android:spinnerMode="dropdown"
+                android:padding="15dp"
+
+                android:dropDownHeight="wrap_content"/>
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Label for Distributor Price -->
+        <TextView
+            android:id="@+id/labelDistributorPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Distributor Price"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:layout_below="@id/inputLayoutDiameter"
+            android:layout_marginTop="16dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayoutDistributorPrice"
+            style="@style/TextInputLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/labelDistributorPrice"
+            android:hint="">
+
+            <EditText
+                android:id="@+id/editDistributorPrice"
+                style="@style/TextInputEditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Label for Quantity -->
+        <TextView
+            android:id="@+id/labelQuantity"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Quantity"
+            android:textColor="#000000"
+            android:textSize="14sp"
+            android:layout_below="@id/inputLayoutDistributorPrice"
+            android:layout_marginTop="16dp"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/inputLayoutQuantity"
+            style="@style/TextInputLayoutStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/labelQuantity"
+            android:hint="">
+
+            <EditText
+                android:id="@+id/editQuantity"
+                style="@style/TextInputEditTextStyle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="number" />
+        </com.google.android.material.textfield.TextInputLayout>
+    <!-- Label for Cost Price -->
+    <TextView
+        android:id="@+id/labelCostPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Cost Price"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:layout_below="@id/inputLayoutQuantity"
+        android:layout_marginTop="16dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputLayoutCostPrice"
+        style="@style/TextInputLayoutStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/labelCostPrice"
+        android:hint="">
+
+        <EditText
+            android:id="@+id/editCostPrice"
+            style="@style/TextInputEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Label for Sell Price -->
+    <TextView
+        android:id="@+id/labelSellPrice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Sell Price"
+        android:textColor="#000000"
+        android:textSize="14sp"
+        android:layout_below="@id/inputLayoutCostPrice"
+        android:layout_marginTop="16dp" />
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/inputLayoutSellPrice"
+        style="@style/TextInputLayoutStyle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/labelSellPrice"
+        android:hint="">
+
+        <EditText
+            android:id="@+id/editSellPrice"
+            style="@style/TextInputEditTextStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number" />
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <!-- Label for Add Stock Button -->
+    <Button
+        android:id="@+id/btnAddStock"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/inputLayoutSellPrice"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="32dp"
+        android:text="Add Stock"
+        android:textColor="#FFFFFF"
+        android:backgroundTint="#1976D2"
+        tools:ignore="NotSibling" />
+
+</RelativeLayout>
+</ScrollView>

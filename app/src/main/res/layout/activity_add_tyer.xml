@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/tyerDetails"
+    >
+    <androidx.appcompat.widget.LinearLayoutCompat
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <!-- Custom layout for Spinner labels Tire Type -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="vertical">
+
+            <TextView
+
+                android:id="@+id/labelTireType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Tire Type"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+            <Spinner
+                android:id="@+id/spinnerTireType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:padding="18dp"
+                android:prompt="@string/spinner_prompt_tire_type"
+                android:entries="@array/tire_types"
+                android:background="@drawable/spinner_background"
+                />
+
+            <TextView
+                android:layout_marginTop="16dp"
+                android:id="@+id/labelVehicalType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vehical Type"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+
+            <Spinner
+                android:id="@+id/spinnerVehicalType"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:padding="18dp"
+                android:prompt="@string/spinner_prompt_tire_type"
+                android:entries="@array/VehicalType"
+                android:background="@drawable/spinner_background"
+                />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputLayoutAspectRatio"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Tyer Aspect Ratio">
+
+                <EditText
+                    android:background="@drawable/edit_text_border"
+                    android:id="@+id/editAspectRatio"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <!-- Width-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputLayoutWidth"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Width">
+
+                <EditText
+                    android:background="@drawable/edit_text_border"
+                    android:id="@+id/editWidth"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <!-- Rim SIze-->
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/inputLayoutRim"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:hint="Rim Diameter">
+
+                <EditText
+                    android:background="@drawable/edit_text_border"
+                    android:id="@+id/editRim"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="numberDecimal" />
+            </com.google.android.material.textfield.TextInputLayout>
+        </LinearLayout>
+
+        <!-- Aspect Ratio-->
+
+    </androidx.appcompat.widget.LinearLayoutCompat>
+</LinearLayout>
