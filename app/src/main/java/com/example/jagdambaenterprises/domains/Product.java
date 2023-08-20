@@ -1,27 +1,124 @@
 package com.example.jagdambaenterprises.domains;
 
-import com.example.jagdambaenterprises.constants.Category;
-import com.example.jagdambaenterprises.constants.TireType;
+import java.sql.Blob;
 
 public class Product {
-    private long id;
+    private String id;
     private String name;
     private String brand;
-    private TireType tireType;
-    private float costPrice;
-    private float sellingPrice;
-    private float wholesalePrice;
-    private int quantity;
-    private Size size;
-    private boolean status;
+    private Integer quantity;
+    private Float costPrice;
+    private Float sellingPrice;
+    private Float wholesalePrice;
+    private String tyreType;
+    private String category;
+    private String vehicleType;
     private User user;
-    private Category category;
+    private Size size;
 
-    public long getId() {
+
+    private byte[] image;
+
+    private boolean status;
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    private boolean istubeless;
+
+    public Product() {
+    }
+
+    public Integer getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(Integer quantity) {
+        this.quantity = quantity;
+    }
+
+    public Float getCostPrice() {
+        return costPrice;
+    }
+
+    public void setCostPrice(Float costPrice) {
+        this.costPrice = costPrice;
+    }
+
+    public Float getSellingPrice() {
+        return sellingPrice;
+    }
+
+    public void setSellingPrice(Float sellingPrice) {
+        this.sellingPrice = sellingPrice;
+    }
+
+    public Float getWholesalePrice() {
+        return wholesalePrice;
+    }
+
+    public void setWholesalePrice(Float wholesalePrice) {
+        this.wholesalePrice = wholesalePrice;
+    }
+
+    public Size getSize() {
+        return size;
+    }
+
+    public void setSize(Size size) {
+        this.size = size;
+    }
+
+    public boolean isIstubeless() {
+        return istubeless;
+    }
+
+    public void setIstubeless(boolean istubeless) {
+        this.istubeless = istubeless;
+    }
+
+    public String getTyreType() {
+        return tyreType;
+    }
+
+    public void setTyreType(String TyreType) {
+        this.tyreType = TyreType;
+    }
+
+    public String getCategory() {
+        return category;
+    }
+
+    public void setCategory(String category) {
+        this.category = category;
+    }
+
+    public String getVehicleType() {
+        return vehicleType;
+    }
+
+    public void setVehicleType(String vehicleType) {
+        this.vehicleType = vehicleType;
+    }
+
+    public boolean isStatus() {
+        return status;
+    }
+
+    public void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -41,63 +138,7 @@ public class Product {
         this.brand = brand;
     }
 
-    public TireType getTireType() {
-        return tireType;
-    }
-
-    public void setTireType(TireType tireType) {
-        this.tireType = tireType;
-    }
-
-    public float getCostPrice() {
-        return costPrice;
-    }
-
-    public void setCostPrice(float costPrice) {
-        this.costPrice = costPrice;
-    }
-
-    public float getSellingPrice() {
-        return sellingPrice;
-    }
-
-    public void setSellingPrice(float sellingPrice) {
-        this.sellingPrice = sellingPrice;
-    }
-
-    public float getWholesalePrice() {
-        return wholesalePrice;
-    }
-
-    public void setWholesalePrice(float wholesalePrice) {
-        this.wholesalePrice = wholesalePrice;
-    }
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
-    }
-
-    public Size getSize() {
-        return size;
-    }
-
-    public void setSize(Size size) {
-        this.size = size;
-    }
-
-    public boolean isStatus() {
-        return status;
-    }
-
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    public User getUser() {
+     public User getUser() {
         return user;
     }
 
@@ -105,11 +146,4 @@ public class Product {
         this.user = user;
     }
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
 }

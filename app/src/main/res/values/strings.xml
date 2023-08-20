@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">JagdambaEnterprises</string>
-    <string-array name="tire_types">
+    <string-array name="Tyre_types">
         <item>FRONT</item>
         <item>REAR</item>
     </string-array>
     <string-array name="sizes">
     </string-array>
     <string-array name="category">
-        <item>Tyer</item>
+        <item>Tyre</item>
         <item>Other</item>
 
     </string-array>
@@ -32,8 +32,14 @@
         <item>Tractor</item>
         <item>Others</item>
     </string-array>
-    <string name="api_url">http://192.168.0.204:8080/</string>
-    <string name="spinner_prompt_tire_type">Select Tire Type</string>
+    <string-array name="filter_options">
+        <item>Filter by Name</item>
+        <item>Filter by Brand</item>
+        <item>Filter by Size</item>
+    </string-array>
+    <string name="api_url">"http://141.148.216.35:8080</string>
+   <!--Ghar 192.168.0.204    dukaan192.168.1.10    instance 141.148.216.35-->
+    <string name="spinner_prompt_Tyre_type">Select Tyre Type</string>
     <string name="spinner_prompt_size">Select Size</string>
     <string name="spinner_prompt_category">Select Category</string>
 

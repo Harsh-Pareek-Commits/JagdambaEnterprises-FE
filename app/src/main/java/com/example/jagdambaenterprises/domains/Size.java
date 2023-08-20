@@ -1,17 +1,9 @@
 package com.example.jagdambaenterprises.domains;
 
+import com.example.jagdambaenterprises.constants.SizeUnit;
+
 public class Size extends Base{
-    private int aspectRatio; // Aspect ratio of the tire
-    private float width;       // Width of the tire in millimeters
-    private int rimDiameter;
-
-    public int getAspectRatio() {
-        return aspectRatio;
-    }
-
-    public void setAspectRatio(int aspectRatio) {
-        this.aspectRatio = aspectRatio;
-    }
+    private String aspectRatio; // Aspect ratio of the Tyre
 
     public float getWidth() {
         return width;
@@ -21,11 +13,42 @@ public class Size extends Base{
         this.width = width;
     }
 
-    public int getRimDiameter() {
-        return rimDiameter;
+    private float width;       // Width of the Tyre in millimeters
+    private int rim;
+    private SizeUnit sizeUnit;
+
+    private int productSize;
+
+    public SizeUnit getSizeUnit() {
+        return sizeUnit;
     }
 
-    public void setRimDiameter(int rimDiameter) {
-        this.rimDiameter = rimDiameter;
+    public void setSizeUnit(SizeUnit sizeUnit) {
+        this.sizeUnit = sizeUnit;
+    }
+
+    public int getProductSize() {
+        return productSize;
+    }
+
+    public void setProductSize(int productSize) {
+        this.productSize = productSize;
+    }
+
+    public String getAspectRatio() {
+        return aspectRatio;
+    }
+
+    public void setAspectRatio(String aspectRatio) {
+        this.aspectRatio = aspectRatio;
+    }
+
+
+    public int getRim() {
+        return rim;
+    }
+
+    public void setRim(int rim) {
+        this.rim = rim;
     }
 }

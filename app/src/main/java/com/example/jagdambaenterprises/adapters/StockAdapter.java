@@ -10,11 +10,16 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jagdambaenterprises.R;
+import com.example.jagdambaenterprises.constants.Category;
 import com.example.jagdambaenterprises.domains.Product;
 
 import java.util.List;
 
 public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
+    public List<Product> getProductList() {
+        return productList;
+    }
+
     private List<Product> productList;
 
     public StockAdapter(List<Product> productList) {
@@ -41,18 +46,22 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
         holder.textWholesalePrice.setText("Wholesale Price: " + product.getWholesalePrice());
 
         // Check if the Size object is not null before accessing its methods
-        if (product.getSize() != null) {
-            if(product.getSize().getAspectRatio()>0) {
+        if (product.getCategory().equals(Category.Tyre.toString())) {
+            if(product.getSize().getAspectRatio()!="" && product.getSize().getAspectRatio()!=null) {
                 holder.textSize.setText("Size: " +  product.getSize().getAspectRatio() +
-                        "-" + product.getSize().getRimDiameter() + "mm");
+                        "-" + product.getSize().getRim());
             }
             else{
                 holder.textSize.setText("Size: " +  product.getSize().getWidth() +
-                        "-" + product.getSize().getRimDiameter() );
+                        "-" + product.getSize().getRim() );
             }
-            holder.textStock.setText("Stock: " + product.getQuantity());
-
         }
+        else {
+            holder.textSize.setText("Size: " +  product.getSize().getProductSize() +
+                    "-" + product.getSize().getSizeUnit());
+        }
+        holder.textStock.setText("Stock: " + product.getQuantity());
+
     }
 
     @Override
@@ -77,7 +86,7 @@ public class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHol
             textCostPrice = itemView.findViewById(R.id.textCostPrice); // Initialize textCostPrice
             textSellingPrice = itemView.findViewById(R.id.textSellingPrice); // Initialize textSellingPrice
             textWholesalePrice = itemView.findViewById(R.id.textWholesalePrice); // Initialize textWholesalePrice
-             textSize = itemView.findViewById(R.id.textSize); // Initialize textAspectRatio
+            textSize = itemView.findViewById(R.id.textSize); // Initialize textAspectRatio
            textStock=itemView.findViewById(R.id.textStock);
             // Initialize other views...
         }

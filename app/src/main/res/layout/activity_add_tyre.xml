@@ -2,34 +2,45 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/tyerDetails"
+    android:id="@+id/TyreDetails"
     >
     <androidx.appcompat.widget.LinearLayoutCompat
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <!-- Custom layout for Spinner labels Tire Type -->
+        <!-- Custom layout for Spinner labels Tyre Type -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:orientation="vertical">
 
+            <Switch
+                android:id="@+id/isTubeless"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:text="Tubeless Tyre"
+                android:background="@drawable/spinner_background"
+                android:padding="16dp"
+                android:layout_marginBottom="10dp"/>
+
             <TextView
 
-                android:id="@+id/labelTireType"
+                android:id="@+id/labelTyreType"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tire Type"
-                android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
+                android:text="Tyre Type"
+                android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+                />
 
             <Spinner
-                android:id="@+id/spinnerTireType"
+                android:id="@+id/spinnerTyreType"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:padding="18dp"
-                android:prompt="@string/spinner_prompt_tire_type"
-                android:entries="@array/tire_types"
+                android:padding="16dp"
+                android:prompt="@string/spinner_prompt_Tyre_type"
+                android:entries="@array/Tyre_types"
                 android:background="@drawable/spinner_background"
                 />
 
@@ -46,8 +57,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
-                android:padding="18dp"
-                android:prompt="@string/spinner_prompt_tire_type"
+                android:padding="16dp"
+                android:prompt="@string/spinner_prompt_Tyre_type"
                 android:entries="@array/VehicalType"
                 android:background="@drawable/spinner_background"
                 />
@@ -58,14 +69,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
-                android:hint="Tyer Aspect Ratio">
+                android:hint="Tyre Aspect Ratio">
 
                 <EditText
                     android:background="@drawable/edit_text_border"
                     android:id="@+id/editAspectRatio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="numberDecimal" />
+                    android:inputType="none" />
             </com.google.android.material.textfield.TextInputLayout>
             <!-- Width-->
             <com.google.android.material.textfield.TextInputLayout
@@ -99,6 +110,34 @@
                     android:layout_height="wrap_content"
                     android:inputType="numberDecimal" />
             </com.google.android.material.textfield.TextInputLayout>
+
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                tools:context=".CameraActivity">
+
+                <FrameLayout
+                    android:id="@+id/cameraPreview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <!-- Camera preview will be shown here -->
+
+                </FrameLayout>
+
+                <Button
+                    android:id="@+id/captureButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Capture"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginBottom="16dp" />
+
+            </RelativeLayout>
+
         </LinearLayout>
 
         <!-- Aspect Ratio-->

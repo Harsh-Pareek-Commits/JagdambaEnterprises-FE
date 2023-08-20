@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.cardview.widget.CardView
-    android:id="@+id/addTyer"
+    android:id="@+id/addTyre"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
@@ -32,7 +32,7 @@
                 android:id="@+id/labelCategory"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Tire Type"
+                android:text="Tyre Type"
                 android:textAppearance="@style/TextAppearance.AppCompat.Caption" />
 
             <Spinner
@@ -41,7 +41,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:padding="18dp"
-                android:prompt="@string/spinner_prompt_tire_type"
+                android:prompt="@string/spinner_prompt_Tyre_type"
                 android:entries="@array/category"
                 android:background="@drawable/spinner_background"
                 />
@@ -150,11 +150,11 @@
                 android:layout_height="wrap_content"
                 android:inputType="number" />
         </com.google.android.material.textfield.TextInputLayout>
-        <!-- Tyer details -->
+        <!-- Tyre details -->
 
         <include
-            layout="@layout/activity_add_tyer"
-            android:id="@+id/tyerDetailsLayout"
+            layout="@layout/activity_add_tyre"
+            android:id="@+id/TyreDetailsLayout"
             android:visibility="gone" />
 
         <!-- Prod details -->

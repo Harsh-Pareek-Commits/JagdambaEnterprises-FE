@@ -55,6 +55,12 @@ public class AddStockActivity extends AppCompatActivity {
             }
         });
     }
-
+    @Override
+    public void onBackPressed() {
+        // Create an intent to navigate to the previous screen
+        Intent intent = new Intent(this, HomeActivity.class);
+        startActivity(intent);
+        finish(); // Finish the current activity to prevent creating a new instance
+    }
 }
 
