@@ -1,53 +1,94 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Define your activity layout -->
-<androidx.core.widget.NestedScrollView
-    android:layout_width="match_parent"
+<LinearLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
 
-    <!-- The single direct child view of the NestedScrollView -->
-    <LinearLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:layout_height="0dp"
+        android:layout_weight="1">
 
-        <!-- SearchView and Spinner -->
+        <!-- The single direct child view of the NestedScrollView -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:padding="16dp">
+            android:orientation="vertical"
+           >
 
             <!-- SearchView -->
             <SearchView
                 android:id="@+id/searchView"
-                android:layout_width="15dp"
+                android:layout_margin="13dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:queryHint="Search products..."
-                android:background="@drawable/edit_text_border"/>
+                android:background="@drawable/edit_text_border"
+                android:iconifiedByDefault="false"/>
 
-            <Spinner
-                android:id="@+id/filterSpinner"
-                android:layout_width="wrap_content"
+            <!-- RecyclerView for displaying search results -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_vertical"
-                android:layout_marginStart="8dp"
-                android:padding="13dp"
-                android:entries="@array/filter_options"
-                android:background="@drawable/spinner_background"/>
+                android:padding="16dp"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
         </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
-        <!-- RecyclerView for displaying search results -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:layout_marginTop="0dp"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true"
+     >
+
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:padding="10dp">
+            <!-- Category Filter Spinner -->
+            <Spinner
+                android:id="@+id/categoryFilterSpinner"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:entries="@array/category"
+                android:background="@drawable/spinner_background2"
+                android:padding="13dp"
+                android:gravity="center"/>
 
-    </LinearLayout>
+            <!-- Tyre Type Filter Spinner -->
+            <Spinner
+                android:id="@+id/typeFilterSpinner"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:entries="@array/Tyre_types"
+                android:background="@drawable/spinner_background2"
+                android:padding="13dp"
+                android:gravity="center"/>
 
-</androidx.core.widget.NestedScrollView>
+            <!-- Quantity Filter Spinner -->
+            <Spinner
+                android:id="@+id/quantityFilterSpinner"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:entries="@array/qunatity"
+                android:background="@drawable/spinner_background2"
+                android:padding="13dp"
+                android:gravity="center"/>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+
+
+</LinearLayout>

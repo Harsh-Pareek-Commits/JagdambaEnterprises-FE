@@ -5,10 +5,22 @@
         <item>REAR</item>
     </string-array>
     <string-array name="sizes">
+        <item>1</item>
     </string-array>
     <string-array name="category">
         <item>Tyre</item>
         <item>Other</item>
+
+    </string-array>
+    <string-array name="qunatity">
+        <item>0-5 Qnt</item>
+        <item>5-10 Qnt</item>
+        <item>10-20 Qnt</item>
+        <item>20-30 Qnt</item>
+        <item>30-40 Qnt</item>
+        <item>40-50 Qnt</item>
+        <item>50-100 Qnt</item>
+        <item>100-200 Qnt</item>
 
     </string-array>
     <string-array name="sizeUnit">
