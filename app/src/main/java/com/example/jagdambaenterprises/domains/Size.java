@@ -2,7 +2,9 @@ package com.example.jagdambaenterprises.domains;
 
 import com.example.jagdambaenterprises.constants.SizeUnit;
 
-public class Size extends Base{
+import java.io.Serializable;
+
+public class Size extends Base implements Serializable {
     private String aspectRatio; // Aspect ratio of the Tyre
 
     public float getWidth() {

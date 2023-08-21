@@ -1,8 +1,9 @@
 package com.example.jagdambaenterprises.domains;
 
+import java.io.Serializable;
 import java.sql.Blob;
 
-public class Product {
+public class Product  implements Serializable {
     private String id;
     private String name;
     private String brand;
@@ -15,7 +16,24 @@ public class Product {
     private String vehicleType;
     private User user;
     private Size size;
+    private boolean selected;
+    private int  requestedQunatity;
 
+    public int getRequestedQunatity() {
+        return requestedQunatity;
+    }
+
+    public void setRequestedQunatity(int requestedQunatity) {
+        this.requestedQunatity = requestedQunatity;
+    }
+
+    public boolean isSelected() {
+        return selected;
+    }
+
+    public void setSelected(boolean selected) {
+        this.selected = selected;
+    }
 
     private byte[] image;
 

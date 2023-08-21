@@ -1,5 +1,6 @@
 package com.example.jagdambaenterprises;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -41,6 +42,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
         private Button addStockButton;
         private Button orderStockButton;
+        @SuppressLint("MissingInflatedId")
+
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -87,7 +90,14 @@ import retrofit2.converter.gson.GsonConverterFactory;
                 }
             });
 
-
+            orderStockButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // Start StockOrderActivity
+                    Intent intent = new Intent(ViewStockActivity.this, StockOrderActivity.class);
+                    startActivity(intent);
+                }
+            });
 
         }
 
