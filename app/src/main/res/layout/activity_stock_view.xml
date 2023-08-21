@@ -1,33 +1,74 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout android:layout_width="match_parent"
+
+<LinearLayout
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="3dp"
+        android:layout_marginTop="0dp"
+        app:cardElevation="5dp"
+        app:cardUseCompatPadding="true">
+
+
+        <LinearLayout
+            android:id="@+id/header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+           >
+
+            <SearchView
+                android:id="@+id/searchView"
+                android:layout_width="25dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+
+                android:layout_weight="0"
+                android:queryHint="Search products..."
+                />
+
+            <Button
+                android:id="@+id/addStockButton"
+                android:layout_weight="1"
+
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:gravity="center"
+                android:text="ADD STOCK" />
+
+            <Button
+                android:layout_weight="1"
+                android:layout_margin="10dp"
+
+                android:id="@+id/orderStockButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="ORDER STOCK" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+    <!-- NestedScrollView for Content -->
+
+    <!-- CardView -->
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1">
 
-        <!-- The single direct child view of the NestedScrollView -->
+        <!-- RecyclerView for displaying search results -->
         <LinearLayout
+            android:id="@+id/header1"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-           >
+            android:orientation="vertical">
 
-            <!-- SearchView -->
-            <SearchView
-                android:id="@+id/searchView"
-                android:layout_margin="13dp"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:queryHint="Search products..."
-                android:background="@drawable/edit_text_border"
-                android:iconifiedByDefault="false"/>
-
-            <!-- RecyclerView for displaying search results -->
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyclerView"
                 android:layout_width="match_parent"
@@ -44,8 +85,7 @@
         android:layout_margin="3dp"
         android:layout_marginTop="0dp"
         app:cardElevation="5dp"
-        app:cardUseCompatPadding="true"
-     >
+        app:cardUseCompatPadding="true">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -53,6 +93,7 @@
             android:orientation="horizontal"
             android:gravity="center"
             android:padding="10dp">
+
             <!-- Category Filter Spinner -->
             <Spinner
                 android:id="@+id/categoryFilterSpinner"
@@ -88,7 +129,5 @@
 
         </LinearLayout>
     </androidx.cardview.widget.CardView>
-
-
 
 </LinearLayout>

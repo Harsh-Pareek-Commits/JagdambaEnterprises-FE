@@ -1,13 +1,19 @@
 package com.example.jagdambaenterprises;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.view.inputmethod.EditorInfo;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -33,7 +39,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
         private ProductSearchAdapter productSearchAdapter;
         private List<Product> productListOriginal; // Store the original product list
 
-
+        private Button addStockButton;
+        private Button orderStockButton;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
@@ -41,11 +48,12 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
             setContentView(R.layout.activity_stock_view);
             searchView = findViewById(R.id.searchView);
+            addStockButton = findViewById(R.id.addStockButton);
+            orderStockButton = findViewById(R.id.orderStockButton);
+            searchView.setIconifiedByDefault(true);
 
-            searchView.setIconifiedByDefault(false);
-
-            searchView.setFocusable(false);
-            searchView.setImeOptions(EditorInfo.IME_ACTION_NONE);
+           // searchView.setFocusable(false);
+            //searchView.setImeOptions(EditorInfo.IME_ACTION_NONE);
 
 
 
@@ -68,6 +76,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
                     return true;
                 }
             });
+            searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
+                @Override
+                public void onFocusChange(View view, boolean hasFocus) {
+                    if (hasFocus) {
+                        onSearchExpanded();
+                    } else {
+                        onSearchCollapsed();
+                    }
+                }
+            });
+
+
 
         }
 
@@ -126,6 +146,23 @@ import retrofit2.converter.gson.GsonConverterFactory;
                 return false;
             }
             return original.toLowerCase().contains(query.toLowerCase());
+        }
+        private void onSearchExpanded() {
+            addStockButton.setVisibility(View.GONE);
+            orderStockButton.setVisibility(View.GONE);
+            setSearchWeight(1);
+        }
+
+        private void onSearchCollapsed() {
+            addStockButton.setVisibility(View.VISIBLE);
+            orderStockButton.setVisibility(View.VISIBLE);
+            setSearchWeight(0);
+        }
+
+        private void setSearchWeight(int weight) {
+            LinearLayout.LayoutParams params = (LinearLayout.LayoutParams) searchView.getLayoutParams();
+            params.weight = weight;
+            searchView.setLayoutParams(params);
         }
     }
 
