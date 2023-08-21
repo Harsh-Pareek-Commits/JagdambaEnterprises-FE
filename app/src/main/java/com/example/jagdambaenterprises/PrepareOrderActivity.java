@@ -19,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.app.ActivityCompat;
@@ -36,16 +37,23 @@ import com.itextpdf.kernel.pdf.PdfWriter;
 import com.itextpdf.layout.Document;
 import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
+import com.itextpdf.layout.element.Table;
+import com.itextpdf.layout.property.HorizontalAlignment;
+import com.itextpdf.layout.property.UnitValue;
+import com.itextpdf.layout.property.VerticalAlignment;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.List;
 
 public class PrepareOrderActivity extends AppCompatActivity {
 
     private List<Product> productList;
     private LinearLayout cardContainer;
+    private static final int SAVE_PDF_REQUEST_CODE = 123;
 
     private Button button;
 
@@ -107,7 +115,7 @@ public class PrepareOrderActivity extends AppCompatActivity {
         if (isQuantityEmpty) {
             Toast.makeText(this, "Please fill in all quantities", Toast.LENGTH_SHORT).show();
         } else {
-            generatePDF();
+            saveAndDownloadPDF();
         }
     }
 
@@ -169,63 +177,87 @@ public class PrepareOrderActivity extends AppCompatActivity {
         cardContainer.addView(cardView);
     }
 
-    private void generatePDF() {
-
+    private void saveAndDownloadPDF() {
         try {
             ByteArrayOutputStream stream = new ByteArrayOutputStream();
             PdfWriter pdfWriter = new PdfWriter(stream);
             PdfDocument pdfDocument = new PdfDocument(pdfWriter);
             Document document = new Document(pdfDocument);
 
-            //Add company logo image to the PDF
-            Bitmap logoBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.logo);
+            Bitmap logoBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.jelogo);
+
+// Resize the logoBitmap to a smaller size
+            int desiredWidth = 100; // Adjust the desired width
+            int desiredHeight = 100; // Adjust the desired height
+            Bitmap resizedLogoBitmap = Bitmap.createScaledBitmap(logoBitmap, desiredWidth, desiredHeight, true);
+
             ByteArrayOutputStream logoStream = new ByteArrayOutputStream();
-            logoBitmap.compress(Bitmap.CompressFormat.PNG, 0 /* Ignored for PNG */, logoStream);
+            resizedLogoBitmap.compress(Bitmap.CompressFormat.PNG, 100, logoStream);
             ImageData imageData = ImageDataFactory.create(logoStream.toByteArray());
             Image image = new Image(imageData);
+
+// Set image alignment to center
+            image.setHorizontalAlignment(HorizontalAlignment.CENTER);
+      //      image.setVerticalAlignment(VerticalAlignment.MIDDLE);
+
             document.add(image);
 
-            // Add a header to the PDF
-            Paragraph header = new Paragraph("Order Details")
+            // Add bill header
+            Paragraph billHeader = new Paragraph("Invoice")
                     .setTextAlignment(com.itextpdf.layout.property.TextAlignment.CENTER)
-                    .setFontSize(20);
-            document.add(header);
+                    .setFontSize(24);
+            document.add(billHeader);
 
-            // Add order details
+            // Create a table for product details
+            Table table = new Table(new float[]{2, 2, 1}); // 3 columns with relative widths
+            table.setWidth(UnitValue.createPercentValue(100)); // Set width to 100% of the page width
+
+            // Add table header row
+            table.addHeaderCell("Product");
+            table.addHeaderCell("Brand");
+            table.addHeaderCell("Quantity");
+
+            // Add order details as table rows
             for (Product product : productList) {
                 if (product.getRequestedQunatity() > 0) {
-                    Paragraph orderDetails = new Paragraph(product.getName() + " " + product.getBrand() + " " + product.getSize() + " " + product.getRequestedQunatity())
-                            .setTextAlignment(com.itextpdf.layout.property.TextAlignment.CENTER)
-                            .setFontSize(16);
-                    document.add(orderDetails);
+                    table.addCell(product.getName());
+                    table.addCell(product.getBrand());
+                    table.addCell(String.valueOf(product.getRequestedQunatity()));
                 }
             }
 
-
+            document.add(table);
             document.close();
+
+            // Save the PDF file
             File pdfFile = new File(getExternalFilesDir(null), "order.pdf");
             FileOutputStream fos = new FileOutputStream(pdfFile);
             byte[] pdfData = stream.toByteArray();
             fos.write(pdfData);
             fos.close();
 
-            // Initiate download using Android Download Manager
-            DownloadManager downloadManager = (DownloadManager) getSystemService(Context.DOWNLOAD_SERVICE);
-            Uri pdfUri = FileProvider.getUriForFile(this, "com.example.jagdambaenterprises.fileprovider", pdfFile);
-
-            DownloadManager.Request request = new DownloadManager.Request(pdfUri);
-            request.setMimeType("application/pdf");
-            request.setTitle("Order PDF");
-            request.setDescription("Downloading your order PDF");
-            request.setDestinationInExternalPublicDir(Environment.DIRECTORY_DOWNLOADS, "order.pdf");
-            request.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
-            request.setAllowedOverMetered(true);
-            request.setAllowedOverRoaming(true);
-
-            // Enqueue the download request
-            downloadManager.enqueue(request);
-        } catch (Exception e) {
+            // Share the PDF using an Intent
+            saveAndSharePDF(pdfFile);
+        } catch (IOException e) {
             e.printStackTrace();
         }
-}
+    }
+    private void saveAndSharePDF(File pdfFile) {
+        Intent intent = new Intent(Intent.ACTION_VIEW);
+        Uri pdfUri = FileProvider.getUriForFile(this, "com.example.jagdambaenterprises.fileprovider", pdfFile);
+        intent.setDataAndType(pdfUri, "application/pdf");
+        intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
+        startActivity(Intent.createChooser(intent, "Open PDF using..."));
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        if (requestCode == SAVE_PDF_REQUEST_CODE) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                saveAndDownloadPDF();
+            } else {
+                Toast.makeText(this, "Permission denied. Cannot save PDF.", Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
 }
