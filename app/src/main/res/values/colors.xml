@@ -12,5 +12,5 @@
     <color name="colorSecondary">#757575</color> <!-- Change this to your secondary color -->
     <color name="colorDivider">#BDBDBD</color> <!-- Change this to your divider color -->
     <color name="colorText">#333333</color> <!-- Change this to your text color -->
-
+    <color name="danger">#731710</color>
 </resources>

@@ -68,6 +68,9 @@
         <activity
             android:name=".PrepareOrderActivity"
             android:label="Add Product" />
+        <activity
+            android:name=".OrderActivity"
+            android:label="Place Order" />
     </application>
 
 </manifest>

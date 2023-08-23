@@ -42,11 +42,11 @@ public class HomeActivity extends AppCompatActivity {
         iconPlaceOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Handle clicking on the "Place Order" icon
-                // Navigate to the PlaceOrderActivity or perform necessary action
+                Intent intent = new Intent(HomeActivity.this, OrderActivity.class); // Replace YourCurrentActivity with the name of your current activity class
+                startActivity(intent);
+                finish();
             }
         });
-
         iconViewOrder.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

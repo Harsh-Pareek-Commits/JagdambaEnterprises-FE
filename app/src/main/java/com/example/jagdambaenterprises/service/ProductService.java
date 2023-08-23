@@ -1,4 +1,4 @@
-package com.example.jagdambaenterprises;
+package com.example.jagdambaenterprises.service;
 
 import retrofit2.Call;
 import retrofit2.http.GET;

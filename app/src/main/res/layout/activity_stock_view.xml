@@ -33,15 +33,7 @@
                 android:queryHint="Search products..."
                 />
 
-            <Button
-                android:id="@+id/addStockButton"
-                android:layout_weight="1"
 
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:gravity="center"
-                android:text="ADD STOCK" />
 
             <Button
                 android:layout_weight="1"

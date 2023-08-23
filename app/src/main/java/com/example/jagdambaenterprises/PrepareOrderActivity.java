@@ -1,16 +1,15 @@
 package com.example.jagdambaenterprises;
 
-import android.app.DownloadManager;
-import android.app.PendingIntent;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
-import android.os.Environment;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -22,14 +21,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
-import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.core.content.FileProvider;
 
-import com.example.jagdambaenterprises.R;
+import com.example.jagdambaenterprises.adapters.OrderStockAdapter;
+import com.example.jagdambaenterprises.adapters.ProductAdapter;
 import com.example.jagdambaenterprises.constants.Category;
 import com.example.jagdambaenterprises.domains.Product;
+import com.example.jagdambaenterprises.domains.StockOrder;
+import com.example.jagdambaenterprises.domains.User;
 import com.itextpdf.io.image.ImageData;
 import com.itextpdf.io.image.ImageDataFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
@@ -39,22 +38,28 @@ import com.itextpdf.layout.element.Image;
 import com.itextpdf.layout.element.Paragraph;
 import com.itextpdf.layout.element.Table;
 import com.itextpdf.layout.property.HorizontalAlignment;
+import com.itextpdf.layout.property.TextAlignment;
 import com.itextpdf.layout.property.UnitValue;
-import com.itextpdf.layout.property.VerticalAlignment;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
+import java.time.LocalDate;
 import java.util.List;
 
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.Response;
+
 public class PrepareOrderActivity extends AppCompatActivity {
+
 
     private List<Product> productList;
     private LinearLayout cardContainer;
     private static final int SAVE_PDF_REQUEST_CODE = 123;
-
+private boolean viewedPDF= false;
     private Button button;
 
     @Override
@@ -91,7 +96,8 @@ public class PrepareOrderActivity extends AppCompatActivity {
             if (quantityText.isEmpty()) {
                 isQuantityEmpty = true;
                 break;
-            } else {
+            }
+            else {
                 // Parse the quantityText to an integer
                 int requestedQuantity = Integer.parseInt(quantityText);
 
@@ -114,15 +120,91 @@ public class PrepareOrderActivity extends AppCompatActivity {
 
         if (isQuantityEmpty) {
             Toast.makeText(this, "Please fill in all quantities", Toast.LENGTH_SHORT).show();
-        } else {
-            saveAndDownloadPDF();
         }
+        else {
+            StockOrder stockOrder = new StockOrder();
+            stockOrder.setProductQuantityMap(productList);
+            stockOrder.setStatus("Pending");
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                stockOrder.setOrderDate(LocalDate.now().toString());
+            }
+            User user = new User();
+            user.setId(1);
+            stockOrder.setUser(user);
+            new AsyncTask<Void, Void, Void>() {
+                @Override
+                protected Void doInBackground(Void... voids) {
+                    OrderStockAdapter apiClient = new OrderStockAdapter(PrepareOrderActivity.this);
+                    apiClient.addProductToApi(stockOrder, new Callback() {
+                        @Override
+                        public void onFailure(Call call, IOException e) {
+                            // Handle failure
+                            Log.e("Prepare Order:", "Failed to add product", e);
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    // Update UI or show a Toast indicating the failure
+                                    Toast.makeText(PrepareOrderActivity.this, "Failed to create stock order: "+ e.getMessage(), Toast.LENGTH_LONG).show();
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onResponse(Call call, Response response) throws IOException {
+                            if (response.isSuccessful()) {
+                                // Product added successfully
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+
+                                        // Update UI or show a Toast indicating success
+                                        Toast.makeText(PrepareOrderActivity.this, "Stock Order created", Toast.LENGTH_SHORT).show();
+                                        // Finish the current activity to restart it
+
+                                       // Intent intent = new Intent(PrepareOrderActivity.this, AddProductActivity.class);
+
+                                       saveAndDownloadPDF();
+
+                                             // startActivity(intent);
+
+                                    }
+                                });
+                            } else {
+                                runOnUiThread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                        // Update UI or show a Toast indicating the failure
+                                        Toast.makeText(PrepareOrderActivity.this, "Failed to create stock orer. Please try again later.", Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                            }
+                        }
+                    });
+                    return null;
+                }
+            }.execute();
+
+
+        }
+
     }
+
 
     private void addProductRow(Product product, LinearLayout cardContainer) {
         String s = "";
+        if (product.getCategory().equals(Category.Tyre.toString())) {
+            if (product.getSize().getAspectRatio() != "" && product.getSize().getAspectRatio() != null) {
+                s = "Size: " + product.getSize().getAspectRatio() +
+                        "-" + product.getSize().getRim();
+            } else {
+                s = "Size: " + product.getSize().getWidth() +
+                        "-" + product.getSize().getRim();
+            }
+        } else {
+            s = "Size: " + product.getSize().getProductSize() +
+                    "-" + product.getSize().getSizeUnit();
+        }
 
-        // ... Your sizeText calculation ...
 
         // Create a CardView
         CardView cardView = new CardView(this);
@@ -155,7 +237,15 @@ public class PrepareOrderActivity extends AppCompatActivity {
 
         // Create TextView for Name, Brand, and Size
         TextView nameBrandSize = new TextView(this);
-        nameBrandSize.setText("Name: " + product.getName() + "\n" + "Brand: " + product.getBrand() + "\n" + "Size " + s);
+        if (product.getCategory().equals(Category.Tyre.toString())) {
+            if (product.isIstubeless()) {
+                nameBrandSize.setText("Name: " + product.getName() + "\n" + "Brand: " + product.getBrand() + "\n" + "Size " + s + "\n" + "Tubeless");
+            } else {
+                nameBrandSize.setText("Name: " + product.getName() + "\n" + "Brand: " + product.getBrand() + "\n" + "Size " + s + "\n" + "Tube Tyre");
+            }
+        } else{
+            nameBrandSize.setText("Name: " + product.getName() + "\n" + "Brand: " + product.getBrand() + "\n" + "Size " + s);
+    }
         nameBrandSize.setTextSize(18);
         leftContentLayout.addView(nameBrandSize);
 
@@ -187,8 +277,8 @@ public class PrepareOrderActivity extends AppCompatActivity {
             Bitmap logoBitmap = BitmapFactory.decodeResource(getResources(), R.drawable.jelogo);
 
 // Resize the logoBitmap to a smaller size
-            int desiredWidth = 100; // Adjust the desired width
-            int desiredHeight = 100; // Adjust the desired height
+            int desiredWidth = 800; // Adjust the desired width
+            int desiredHeight = 300; // Adjust the desired height
             Bitmap resizedLogoBitmap = Bitmap.createScaledBitmap(logoBitmap, desiredWidth, desiredHeight, true);
 
             ByteArrayOutputStream logoStream = new ByteArrayOutputStream();
@@ -198,39 +288,88 @@ public class PrepareOrderActivity extends AppCompatActivity {
 
 // Set image alignment to center
             image.setHorizontalAlignment(HorizontalAlignment.CENTER);
+            image.setMargins(0, 0, 0, 0)   ;
       //      image.setVerticalAlignment(VerticalAlignment.MIDDLE);
 
             document.add(image);
+            Paragraph Name = new Paragraph("Brahmanand Pareek")
+                    .setTextAlignment(com.itextpdf.layout.property.TextAlignment.LEFT)
+                    .setFontSize(16)
+                    .setBold();
+            document.add(Name);
+            Paragraph contact = new Paragraph("      9435338217")
+                    .setTextAlignment(com.itextpdf.layout.property.TextAlignment.LEFT)
+                    .setFontSize(16);
+            document.add(contact);
 
+            Paragraph date = null;
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+                date = new Paragraph("Date: " + java.time.LocalDate.now().toString())
+                        .setTextAlignment(TextAlignment.LEFT)
+                        .setFontSize(16);
+            }
+            document.add(date);
             // Add bill header
-            Paragraph billHeader = new Paragraph("Invoice")
+            Paragraph billHeader = new Paragraph("Request for Stock")
                     .setTextAlignment(com.itextpdf.layout.property.TextAlignment.CENTER)
-                    .setFontSize(24);
+                    .setFontSize(14)
+                    .setBold();
             document.add(billHeader);
 
             // Create a table for product details
-            Table table = new Table(new float[]{2, 2, 1}); // 3 columns with relative widths
+            Table table = new Table(new float[]{1,2, 2,2,2, 1}); // 3 columns with relative widths
             table.setWidth(UnitValue.createPercentValue(100)); // Set width to 100% of the page width
-
+            // Add the cell to the table
             // Add table header row
-            table.addHeaderCell("Product");
-            table.addHeaderCell("Brand");
-            table.addHeaderCell("Quantity");
+            table.addHeaderCell("S.No.").setBold().setTextAlignment(TextAlignment.CENTER);
+            table.addHeaderCell("Name").setBold().setTextAlignment(TextAlignment.CENTER);
+            table.addHeaderCell("Brand").setBold().setTextAlignment(TextAlignment.CENTER);
+            table.addHeaderCell("Size").setBold().setTextAlignment(TextAlignment.CENTER);
+            table.addHeaderCell("Category").setBold().setTextAlignment(TextAlignment.CENTER);
+            table.addHeaderCell("Quantity").setBold().setTextAlignment(TextAlignment.CENTER);
 
-            // Add order details as table rows
             for (Product product : productList) {
+                int x=1;
+                String s= "";
+                String name="";
+                if (product.getCategory().equals(Category.Tyre.toString())) {
+                if(product.getSize().getAspectRatio()!="" && product.getSize().getAspectRatio()!=null) {
+                    s="Size: " +  product.getSize().getAspectRatio() +
+                            "-" + product.getSize().getRim();
+                }
+                else{
+                    s="Size: " +  product.getSize().getWidth() +
+                            "-" + product.getSize().getRim() ;
+                }
+            if (product.isIstubeless()){
+                name= product.getName() + " (Tubeless)";
+                    }
+            else{
+                name= product.getName() + " (Tube Tyre)";
+            }
+                }
+        else {
+                s="Size: " +  product.getSize().getProductSize() +
+                        "-" + product.getSize().getSizeUnit();
+                name=product.getName();
+            }
+
                 if (product.getRequestedQunatity() > 0) {
-                    table.addCell(product.getName());
+                    table.addCell(String.valueOf(x));
+                    table.addCell(name);
                     table.addCell(product.getBrand());
+                    table.addCell(s);
+                    table.addCell(product.getCategory());
                     table.addCell(String.valueOf(product.getRequestedQunatity()));
                 }
+                x=x+1;
             }
 
             document.add(table);
             document.close();
 
             // Save the PDF file
-            File pdfFile = new File(getExternalFilesDir(null), "order.pdf");
+            File pdfFile = new File(getExternalFilesDir(null), "JagdambaEnterprisesOrder.pdf");
             FileOutputStream fos = new FileOutputStream(pdfFile);
             byte[] pdfData = stream.toByteArray();
             fos.write(pdfData);
@@ -248,6 +387,16 @@ public class PrepareOrderActivity extends AppCompatActivity {
         intent.setDataAndType(pdfUri, "application/pdf");
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);
         startActivity(Intent.createChooser(intent, "Open PDF using..."));
+        viewedPDF=true;
+    }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (viewedPDF){
+            Intent intent = new Intent(PrepareOrderActivity.this, HomeActivity.class);
+
+            startActivity(intent);
+        }
     }
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {

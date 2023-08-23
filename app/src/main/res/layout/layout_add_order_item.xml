@@ -1,0 +1,151 @@
+<!-- layout add order Item  -->
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/parentLayout"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+    <androidx.cardview.widget.CardView
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        app:cardElevation="8dp"
+        app:cardCornerRadius="16dp"
+        app:cardUseCompatPadding="true">
+
+        <!-- Parent Vertical LinearLayout -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Product Details -->
+            <LinearLayout
+                android:id="@+id/ProductDetails"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <CheckBox
+                    android:id="@+id/checkBox"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginEnd="8dp"
+                    android:visibility="invisible"/>
+
+                <!-- ImageView for the image on the left -->
+                <ImageView
+                    android:id="@+id/imageView"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:src="@drawable/tyre"
+                    android:layout_gravity="center_vertical"
+                    android:scaleType="centerCrop"
+
+                    android:contentDescription="Product Image"/>
+
+                <!-- Vertical LinearLayout for text information -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical"
+                    android:gravity="start|center_vertical"
+                    android:paddingStart="16dp">
+
+                    <!-- Product Name -->
+                    <TextView
+                        android:id="@+id/textName"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="18sp"
+                        android:textStyle="bold"/>
+
+                    <!-- Product Brand -->
+                    <TextView
+                        android:id="@+id/textBrand"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"/>
+
+                    <!-- Size Info -->
+                    <TextView
+                        android:id="@+id/textSize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"/>
+
+                    <!-- Selling Price -->
+                    <TextView
+                        android:id="@+id/textSellingPrice"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"/>
+
+                    <!-- Stock -->
+                    <TextView
+                        android:id="@+id/textStock"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textSize="14sp"/>
+
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- Quantity Layout -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+            <LinearLayout
+                android:id="@+id/quantityLayout"
+                android:visibility="gone"
+                android:layout_gravity="center"
+                android:layout_margin="10px"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:padding="10dp">>
+
+                <!-- Quantity Spinner -->
+                <Spinner
+                    android:id="@+id/quantitySpinner"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+
+                    android:layout_marginTop="8dp"/>
+
+                <!-- Add Button -->
+                <Button
+                    android:id="@+id/addButton"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Add"
+                    android:layout_weight="1"
+                    />
+            </LinearLayout>
+            <LinearLayout
+                android:id="@+id/RemoveLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:visibility="gone">
+                <Button
+                    android:id="@+id/Remove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/danger"
+                    android:text="Remove from Cart"
+                    android:layout_weight="1"
+
+                    />
+            </LinearLayout>
+        </LinearLayout>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>
+

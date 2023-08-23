@@ -7,12 +7,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
+import android.widget.TableLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.jagdambaenterprises.adapters.AddOrderAdapter;
 import com.example.jagdambaenterprises.adapters.OrderStockAdapter;
 import com.example.jagdambaenterprises.service.ProductService;
 import com.example.jagdambaenterprises.domains.Product;
@@ -27,33 +31,34 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class StockOrderActivity extends AppCompatActivity  {
+public class OrderActivity extends AppCompatActivity  {
 
     private RecyclerView recyclerView;
-    private OrderStockAdapter orderStockAdapter;
+    private AddOrderAdapter addOrderAdapter;
     private List<Product> productListOriginal;
     private List<Product> selectedProducts = new ArrayList<>();
     private SearchView searchView;
     private SparseBooleanArray selectedItems; // To store selected items' positions
     private Button prepareOrder;
-
-
+    private CardView innerCardView,productDetails;
+    private TextView message;
+private TableLayout seletectedProductTableLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_stock_order);
+        setContentView(R.layout.activity_add_order);
         fetchProductDetails();
         prepareOrder=findViewById(R.id.prepareOrder);
         searchView = findViewById(R.id.searchView1);
         searchView.setIconifiedByDefault(true);
-
+        innerCardView=findViewById(R.id.selectedProductCardView);
+        message=findViewById(R.id.selectedProductTextView);
         recyclerView = findViewById(R.id.recyclerView);
+        View parentView = findViewById(android.R.id.content); // Get the parent view of the activity
+        addOrderAdapter = new AddOrderAdapter(new ArrayList<>(), parentView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
-        orderStockAdapter = new OrderStockAdapter(new ArrayList<>());
-      //  orderStockAdapter.setOnCardClickListener(this); // Set the card click listener
-        recyclerView.setAdapter(orderStockAdapter);
-
-        selectedItems = new SparseBooleanArray();
+        recyclerView.setAdapter(addOrderAdapter);
+        seletectedProductTableLayout=findViewById(R.id.productQuantityTablePreview);
 
         // Fetch data and set adapter...
 
@@ -75,6 +80,20 @@ public class StockOrderActivity extends AppCompatActivity  {
                 prepareOrder();
             }
         });
+
+        message.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (innerCardView.getVisibility() == View.GONE) {
+                    innerCardView.setVisibility(View.VISIBLE);
+                    message.setText("Click to collapse view selected products");
+                } else { // Corrected this line
+                    innerCardView.setVisibility(View.GONE);
+                    message.setText("Click here to expand view selected products");
+                }
+            }
+        });
+
         searchView.setOnQueryTextFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
@@ -99,11 +118,11 @@ public class StockOrderActivity extends AppCompatActivity  {
                 }
 
                 if (selectedProducts.isEmpty()) {
-                    Toast.makeText(StockOrderActivity.this, "Please select at least one product", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OrderActivity.this, "Please select at least one product", Toast.LENGTH_SHORT).show();
                     return;
                 }
 
-                Intent intent = new Intent(StockOrderActivity.this, PrepareOrderActivity.class);
+                Intent intent = new Intent(OrderActivity.this, PrepareOrderActivity.class);
                 intent.putExtra("productList", (Serializable) selectedProducts);
 
                 startActivity(intent);
@@ -136,16 +155,16 @@ public class StockOrderActivity extends AppCompatActivity  {
                 if (response.isSuccessful()) {
                     List<Product> productList = response.body();
                     productListOriginal=productList;
-                    orderStockAdapter.setProductList(productList); // Use setProductList method
+                    addOrderAdapter.setProductList(productList); // Use setProductList method
                 } else {
-                    Toast.makeText(StockOrderActivity.this, "Failed to fetch product details", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(OrderActivity.this, "Failed to fetch product details", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
                 String errorMessage = "Network error: " + t.getMessage();
-                Toast.makeText(StockOrderActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
+                Toast.makeText(OrderActivity.this, errorMessage, Toast.LENGTH_SHORT).show();
                 Log.e("ViewStockActivity", errorMessage);
             }
         });
@@ -168,7 +187,7 @@ public class StockOrderActivity extends AppCompatActivity  {
                 filteredProducts.add(product);
             }
         }
-        orderStockAdapter.setProductList(filteredProducts); // Update the adapter with filtered list
+        addOrderAdapter.setProductList(filteredProducts); // Update the adapter with filtered list
     }
 
     private boolean containsPartialMatch(String original, String query) {
