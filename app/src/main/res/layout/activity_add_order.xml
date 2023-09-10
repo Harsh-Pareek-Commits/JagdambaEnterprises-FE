@@ -87,21 +87,44 @@
                 app:cardUseCompatPadding="true"
                 android:visibility="gone">
 
-            <!-- Parent Vertical LinearLayout -->
             <LinearLayout
+
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:padding="16dp">
 
-                <!-- ... (Other views) ... -->
-                <TextView
-                    android:id="@+id/selectedProductTextView"
-                    android:layout_height="wrap_content"
-                    android:text="Click here to expand view selected products "
-                    android:textStyle="bold"
+                <LinearLayout
+                    android:id="@+id/dropdownCardView"
                     android:layout_width="match_parent"
-                   />
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <!-- TextView for the text -->
+                    <TextView
+                        android:id="@+id/selectedProductTextView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Tap to expand "
+                        android:textStyle="bold"
+                        android:layout_weight="1"
+                        android:textSize="18sp"
+                        />
+
+                    <!-- ImageView for the icon -->
+                    <ImageView
+                        android:id="@+id/idropdownicon"
+                        android:layout_width="25dp"
+                        android:layout_height="25dp"
+                        android:src="@drawable/down"
+                        android:layout_gravity="center_vertical"
+                        android:scaleType="fitCenter"
+                        android:contentDescription="Product Image"/>
+                </LinearLayout>
+
+                <!-- Other views or components can be added here -->
+
 
                 <androidx.cardview.widget.CardView
 
@@ -116,17 +139,16 @@
 
 
                 <!-- TableLayout for product and quantity preview -->
+                    <LinearLayout
+                        android:id="@+id/detailsCardView"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:padding="8dp">
 
-                <TableLayout
-                    android:id="@+id/productQuantityTablePreview"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:visibility="gone"
-                    app:layout_constraintTop_toBottomOf="@id/headerAddOrder">
+                        <!-- Dynamically generated CardViews will be added here -->
 
-
-                </TableLayout>
+                    </LinearLayout>
 
                 </androidx.cardview.widget.CardView>
             </LinearLayout>

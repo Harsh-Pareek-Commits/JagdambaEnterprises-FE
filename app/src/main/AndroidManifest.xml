@@ -71,6 +71,9 @@
         <activity
             android:name=".OrderActivity"
             android:label="Place Order" />
+        <activity
+            android:name=".ConfirmOrderActivity"
+            android:label="Place Order" />
     </application>
 
 </manifest>

@@ -7,6 +7,7 @@ android {
     namespace = "com.example.jagdambaenterprises"
     compileSdk = 33
 
+
     defaultConfig {
         applicationId = "com.example.jagdambaenterprises"
         minSdk = 24
@@ -15,6 +16,9 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+    packagingOptions {
+        exclude("META-INF/DEPENDENCIES")
     }
 
     buildTypes {
@@ -30,9 +34,12 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+
 }
 
 dependencies {
+    implementation ("com.twilio.sdk:twilio:9.0.0")
+
     implementation("com.google.android.material:material:1.4.0")
     implementation("com.itextpdf:itext7-core:7.1.16")
 

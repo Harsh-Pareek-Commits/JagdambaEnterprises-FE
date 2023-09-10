@@ -99,7 +99,8 @@
             <!-- Quantity Layout -->
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
             <LinearLayout
                 android:id="@+id/quantityLayout"
                 android:visibility="gone"
@@ -138,9 +139,9 @@
                     android:id="@+id/Remove"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:background="@color/danger"
                     android:text="Remove from Cart"
                     android:layout_weight="1"
+                    android:layout_margin="16dp"
 
                     />
             </LinearLayout>

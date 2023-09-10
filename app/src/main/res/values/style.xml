@@ -17,5 +17,8 @@
         <item name="windowNoTitle">true</item>
         <!-- ... other attributes ... -->
     </style>
-
+    <style name="TableRowText">
+        <item name="android:textSize">18sp</item> <!-- Adjust the text size as needed -->
+        <item name="android:textAlignment">center</item>
+    </style>
 </resources>

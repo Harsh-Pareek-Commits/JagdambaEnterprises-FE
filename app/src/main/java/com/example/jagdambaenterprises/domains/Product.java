@@ -14,16 +14,21 @@ public class Product  implements Serializable {
     private String tyreType;
     private String category;
     private String vehicleType;
+
+    private String HSNCode;
+
+
+
     private User user;
     private Size size;
     private boolean selected;
-    private int  requestedQunatity;
+    private Integer  requestedQunatity;
 
-    public int getRequestedQunatity() {
+    public Integer getRequestedQunatity() {
         return requestedQunatity;
     }
 
-    public void setRequestedQunatity(int requestedQunatity) {
+    public void setRequestedQunatity(Integer requestedQunatity) {
         this.requestedQunatity = requestedQunatity;
     }
 
@@ -163,5 +168,11 @@ public class Product  implements Serializable {
     public void setUser(User user) {
         this.user = user;
     }
+    public String getHSNCode() {
+        return HSNCode;
+    }
 
+    public void setHSNCode(String HSNCode) {
+        this.HSNCode = HSNCode;
+    }
 }

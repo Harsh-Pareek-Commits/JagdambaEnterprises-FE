@@ -23,6 +23,18 @@
         <item>100-200 Qnt</item>
 
     </string-array>
+    <string-array name="emp">
+        <item>Brahmanand Pareek</item>
+        <item>Dharamveer</item>
+        <item>Vivek Pareek</item>
+        <item>Harsh Pareek</item>
+
+
+    </string-array>
+    <string-array name="orderType">
+        <item>Retail</item>
+        <item>Wholesale</item>
+    </string-array>
     <string-array name="sizeUnit">
         <item>KG</item>
         <item>Gram</item>
@@ -35,7 +47,7 @@
         <item>Inch</item>
         <item>MM</item>
         <item>CM</item>
-       <item>Others</item>
+        <item>Others</item>
     </string-array>
     <string-array name="VehicalType">
         <item>TwoWheeler</item>
@@ -49,7 +61,7 @@
         <item>Filter by Brand</item>
         <item>Filter by Size</item>
     </string-array>
-    <string name="api_url">"http://192.168.0.204:8080</string>
+    <string name="api_url">"http://141.148.216.35:8080</string>
    <!--Ghar 192.168.0.204    dukaan192.168.1.10    instance 141.148.216.35-->
     <string name="spinner_prompt_Tyre_type">Select Tyre Type</string>
     <string name="spinner_prompt_size">Select Size</string>

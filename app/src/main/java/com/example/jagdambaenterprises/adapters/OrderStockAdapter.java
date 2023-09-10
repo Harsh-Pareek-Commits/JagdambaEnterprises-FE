@@ -14,6 +14,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.jagdambaenterprises.R;
 import com.example.jagdambaenterprises.constants.Category;
+import com.example.jagdambaenterprises.domains.Order;
 import com.example.jagdambaenterprises.domains.Product;
 import com.example.jagdambaenterprises.domains.StockOrder;
 import com.google.gson.Gson;
@@ -102,10 +103,10 @@ private LinearLayout quantityLayout;
 
         } else {
             product.setSelected(false);
-            if (product.getQuantity() <= 5) {
+            if (product.getQuantity() <= 10) {
                 holder.itemView.setBackgroundColor(Color.parseColor("#ffcccc"));
             }
-            if (product.getQuantity() > 5) {
+            if (product.getQuantity() > 10) {
                 holder.itemView.setBackgroundColor(Color.parseColor("#e6fff3"));
             }
 
@@ -163,6 +164,20 @@ private LinearLayout quantityLayout;
         RequestBody body = RequestBody.create(mediaType,jsonProduct);
         Request request = new Request.Builder()
                 .url(apiBaseUrl+"/order/create/stock-order")
+                .post(body)
+                .build();
+
+        client.newCall(request).enqueue(callback);
+    }
+    public void addOrderAPI(Order order, Callback callback) {
+        OkHttpClient client = new OkHttpClient();
+        MediaType mediaType = MediaType.parse("application/json");
+        Gson gson = new Gson();
+        String jsonProduct = gson.toJson(order);
+        Log.w("Payload", jsonProduct);
+        RequestBody body = RequestBody.create(mediaType,jsonProduct);
+        Request request = new Request.Builder()
+                .url(apiBaseUrl+"/order/create")
                 .post(body)
                 .build();
 

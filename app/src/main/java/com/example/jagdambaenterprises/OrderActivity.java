@@ -5,6 +5,7 @@ import android.util.Log;
 import android.util.SparseBooleanArray;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SearchView;
 import android.widget.TableLayout;
@@ -17,7 +18,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.jagdambaenterprises.adapters.AddOrderAdapter;
-import com.example.jagdambaenterprises.adapters.OrderStockAdapter;
 import com.example.jagdambaenterprises.service.ProductService;
 import com.example.jagdambaenterprises.domains.Product;
 
@@ -41,7 +41,9 @@ public class OrderActivity extends AppCompatActivity  {
     private SparseBooleanArray selectedItems; // To store selected items' positions
     private Button prepareOrder;
     private CardView innerCardView,productDetails;
+    private LinearLayout messageLayout;
     private TextView message;
+    private ImageView imageView;
 private TableLayout seletectedProductTableLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -52,15 +54,15 @@ private TableLayout seletectedProductTableLayout;
         searchView = findViewById(R.id.searchView1);
         searchView.setIconifiedByDefault(true);
         innerCardView=findViewById(R.id.selectedProductCardView);
-        message=findViewById(R.id.selectedProductTextView);
+        messageLayout=findViewById(R.id.dropdownCardView);
         recyclerView = findViewById(R.id.recyclerView);
         View parentView = findViewById(android.R.id.content); // Get the parent view of the activity
         addOrderAdapter = new AddOrderAdapter(new ArrayList<>(), parentView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(addOrderAdapter);
-        seletectedProductTableLayout=findViewById(R.id.productQuantityTablePreview);
+        message=findViewById(R.id.selectedProductTextView);
+        imageView=findViewById(R.id.idropdownicon);
 
-        // Fetch data and set adapter...
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -81,15 +83,17 @@ private TableLayout seletectedProductTableLayout;
             }
         });
 
-        message.setOnClickListener(new View.OnClickListener() {
+        messageLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (innerCardView.getVisibility() == View.GONE) {
                     innerCardView.setVisibility(View.VISIBLE);
-                    message.setText("Click to collapse view selected products");
+                    message.setText("Tap to collapse ");
+                    imageView.setImageResource(R.drawable.up);
                 } else { // Corrected this line
                     innerCardView.setVisibility(View.GONE);
-                    message.setText("Click here to expand view selected products");
+                    message.setText("Tap to expand");
+                    imageView.setImageResource(R.drawable.down);
                 }
             }
         });
@@ -122,7 +126,7 @@ private TableLayout seletectedProductTableLayout;
                     return;
                 }
 
-                Intent intent = new Intent(OrderActivity.this, PrepareOrderActivity.class);
+                Intent intent = new Intent(OrderActivity.this, ConfirmOrderActivity.class);
                 intent.putExtra("productList", (Serializable) selectedProducts);
 
                 startActivity(intent);
@@ -138,7 +142,10 @@ private TableLayout seletectedProductTableLayout;
             if (productListOriginal.get(i).isSelected()) {
                 selectedProductsList.add(productListOriginal.get(i));
             }
-        }}
+        }
+        Intent intent = new Intent(OrderActivity.this, ConfirmOrderActivity.class); // Replace YourCurrentActivity with the name of your current activity class
+        startActivity(intent);
+    }
 
     private void fetchProductDetails() {
         Retrofit retrofit = new Retrofit.Builder()
