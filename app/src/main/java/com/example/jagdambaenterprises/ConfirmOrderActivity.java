@@ -15,6 +15,7 @@ import com.example.jagdambaenterprises.adapters.AddOrderAdapter;
 import com.twilio.rest.api.v2010.account.Message;
 
 import android.util.Base64;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.View;
@@ -247,11 +248,11 @@ public class ConfirmOrderActivity extends AppCompatActivity {
         sendSms(hindi);
 
 
-           new AsyncTask<Void, Void, Void>() {
+         /*  new AsyncTask<Void, Void, Void>() {
                 @Override
                 protected Void doInBackground(Void... voids) {
                     AddOrderAdapter apiClient = new AddOrderAdapter(ConfirmOrderActivity.this);
-                    apiClient.addOrderAPI(orderDetails, new Callback() {
+                    apiClient.addOrder(orderDetails, new Callback() {
                         @Override
                         public void onFailure(Call call, IOException e) {
                             // Handle failure
@@ -299,7 +300,7 @@ public class ConfirmOrderActivity extends AppCompatActivity {
                     return null;
                 }
             }.execute();
-
+*/
 
         }
 

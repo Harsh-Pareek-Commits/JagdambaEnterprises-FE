@@ -61,8 +61,8 @@
         <item>Filter by Brand</item>
         <item>Filter by Size</item>
     </string-array>
-    <string name="api_url">"http://141.148.216.35:8080</string>
-   <!--Ghar 192.168.0.204    dukaan192.168.1.10    instance 141.148.216.35-->
+    <string name="api_url">"http://192.168.0.145:8080</string>
+   <!--Ghar 192.168.0.145    dukaan192.168.1.10    instance 141.148.216.35-->
     <string name="spinner_prompt_Tyre_type">Select Tyre Type</string>
     <string name="spinner_prompt_size">Select Size</string>
     <string name="spinner_prompt_category">Select Category</string>

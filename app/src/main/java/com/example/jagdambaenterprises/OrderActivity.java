@@ -155,7 +155,6 @@ private TableLayout seletectedProductTableLayout;
 
         ProductService productService = retrofit.create(ProductService.class);
         Call<List<Product>> call = productService.getAllProducts("JSESSIONID=E4CAEF499E17B96593D74D385EACDEFD");
-
         call.enqueue(new Callback<List<Product>>() {
             @Override
             public void onResponse(Call<List<Product>> call, Response<List<Product>> response) {
@@ -167,7 +166,6 @@ private TableLayout seletectedProductTableLayout;
                     Toast.makeText(OrderActivity.this, "Failed to fetch product details", Toast.LENGTH_SHORT).show();
                 }
             }
-
             @Override
             public void onFailure(Call<List<Product>> call, Throwable t) {
                 String errorMessage = "Network error: " + t.getMessage();

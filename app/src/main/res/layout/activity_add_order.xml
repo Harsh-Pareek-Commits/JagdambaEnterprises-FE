@@ -138,17 +138,17 @@
                    >
 
 
-                <!-- TableLayout for product and quantity preview -->
-                    <LinearLayout
-                        android:id="@+id/detailsCardView"
+
+                    <TableLayout
+                        android:id="@+id/productQuantityTablePreview"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:orientation="vertical"
-                        android:padding="8dp">
+                        android:layout_marginTop="16dp"
+                        android:visibility="gone"
+                        app:layout_constraintTop_toBottomOf="@id/headerAddOrder">
 
-                        <!-- Dynamically generated CardViews will be added here -->
 
-                    </LinearLayout>
+                    </TableLayout>
 
                 </androidx.cardview.widget.CardView>
             </LinearLayout>
